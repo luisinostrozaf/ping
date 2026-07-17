@@ -7,27 +7,42 @@ on:
     branches: [ master ]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   keep-alive:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout código
       uses: actions/checkout@v4
       with:
         ref: master
-    
+
     - name: Configurar Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.10'
-    
+        python-version: '3.11'
+
     - name: Instalar dependencias
       run: |
-        pip install requests
-    
+        python -m pip install --upgrade pip
+        python -m pip install requests
+
+    - name: Verificar secrets
+      env:
+        SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+        SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+      run: |
+        if [ -z "${SUPABASE_URL}" ] || [ -z "${SUPABASE_KEY}" ]; then
+          echo "Faltan secrets SUPABASE_URL o SUPABASE_KEY en GitHub"
+          exit 1
+        fi
+        echo "Secrets configurados"
+
     - name: Ejecutar keep-alive
       env:
         SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
         SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-      run: python keep_alive.py
+      run: python3 keep_alive.py
