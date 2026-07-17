@@ -3,8 +3,7 @@ name: Keep Supabase Alive
 on:
   schedule:
     - cron: '*/5 * * * *'
-  workflow_dispatch:
-    branches: [master]
+  workflow_dispatch:  # ✅ Así, sin branches
 
 permissions:
   contents: read
