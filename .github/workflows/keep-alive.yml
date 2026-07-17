@@ -12,6 +12,8 @@ jobs:
     steps:
     - name: Checkout código
       uses: actions/checkout@v4
+      with:
+        ref: master  # 👈 Especifica explícitamente la rama master
     
     - name: Configurar Python
       uses: actions/setup-python@v5
