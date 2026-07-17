@@ -12,6 +12,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Debug workflow status
+      run: |
+        echo "GitHub event: ${{ github.event_name }}"
+        echo "Workflow triggered by: ${{ github.triggering_actor }}"
+        echo "Repository: ${{ github.repository }}"
+        
     - name: Registrar ejecución
       run: |
         echo "Evento: ${{ github.event_name }}"
