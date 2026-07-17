@@ -3,7 +3,7 @@ name: Keep Supabase Alive
 on:
   schedule:
     - cron: '*/5 * * * *'
-  workflow_dispatch:  # ✅ Así, sin branches
+  workflow_dispatch: 
 
 permissions:
   contents: read
@@ -17,9 +17,6 @@ jobs:
       uses: actions/checkout@v4
       with:
         ref: master
-
-    - name: Mostrar hora de inicio
-      run: echo "Workflow ejecutado a las $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
 
     - name: Configurar Python
       uses: actions/setup-python@v5
