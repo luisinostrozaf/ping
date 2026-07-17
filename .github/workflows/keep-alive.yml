@@ -2,8 +2,7 @@ name: Keep Supabase Alive
 
 on:
   schedule:
-    - cron: '* * * * *'
-  workflow_dispatch:
+    - cron: '5 * * * *'
 
 permissions:
   contents: read
