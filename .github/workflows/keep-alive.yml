@@ -2,7 +2,7 @@ name: Keep Supabase Alive
 
 on:
   schedule:
-    - cron: '0,5,10,15,20,25,30,35,40,45,50,55 * * * *'
+    - cron: '* * * * *'
   workflow_dispatch:
 
 permissions:
@@ -13,6 +13,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Registrar ejecución
+      run: |
+        echo "Evento: ${{ github.event_name }}"
+        echo "Rama: ${{ github.ref_name }}"
+        date -u
+
     - name: Checkout código
       uses: actions/checkout@v4
       with:
